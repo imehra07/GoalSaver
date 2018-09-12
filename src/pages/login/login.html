@@ -1,0 +1,49 @@
+ <form #loginform="ngForm">
+    <ion-row>
+      <ion-col>
+        <ion-list>
+          <ion-item>
+            <ion-input type="text" placeholder="User Name" name="Username" autocomplete="on" [(ngModel)]="loginUser.username">
+
+            </ion-input>
+          </ion-item>
+          <ion-item *ngIf="newUser">
+            <ion-input type="text" placeholder="Email" name="Email" autocomplete="on" [(ngModel)]="loginUser.email">
+
+            </ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-input type="text" placeholder="Password" name="Password" type="password" autocomplete="on" [(ngModel)]="loginUser.password">
+
+            </ion-input>
+          </ion-item>
+
+          <ion-item *ngIf="newUser">
+            <ion-input type="text" placeholder="Confirm Password" name="Password" type="confirmpassword" autocomplete="on" [(ngModel)]="loginUser.confirmPassword">
+
+            </ion-input>
+          </ion-item>
+
+
+          <ion-item *ngIf="newUser">
+            <ion-input type="text" placeholder="Salary" name="salary" autocomplete="on" [(ngModel)]="loginUser.salary">
+
+            </ion-input>
+          </ion-item>
+
+          <ion-item *ngIf="newUser">
+            <ion-input type="text" placeholder="Goal" name="goal" autocomplete="on" [(ngModel)]="loginUser.goal">
+
+            </ion-input>
+          </ion-item>
+          <ion-item *ngIf="!newUser">
+            <ion-button (click)="authenticate()">Login / Register</ion-button>
+          </ion-item>
+          <ion-item *ngIf="newUser">
+            <ion-button (click)="signUp()">Register</ion-button>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+
+  </form>
