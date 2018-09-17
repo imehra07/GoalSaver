@@ -23,13 +23,9 @@ const CognitoConfig = {
 };
 
 export const AmazonCognitoIdentityToken: InjectionToken<String> = new InjectionToken<String>('AmazonCognitoIdentity');
-export const CognitoUserPoolToken : InjectionToken<String>= new InjectionToken<String>('CognitoUserPool');
-export const CognitoUserAttributeToken: InjectionToken<String> = new InjectionToken<String>('CognitoUserAttribute');
 export const CognitoConfigToken: InjectionToken<String> = new InjectionToken<String>('CognitoConfig');
-export const poolDataToken: InjectionToken<String> = new InjectionToken<String>('poolData');
 export const ddbToken: InjectionToken<String> = new InjectionToken<String>('ddb');
 export const AWSToken: InjectionToken<String> = new InjectionToken<String>('AWS');
-export const userPoolToken: InjectionToken<String> = new InjectionToken<String>('userPool');
 @NgModule({
   declarations: [
 
