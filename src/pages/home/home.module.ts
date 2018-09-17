@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HomePage } from './home';
+import { SharedModule } from '../../shared/shared.module';
 
 const COMPONENTS = [ HomePage ];
 
@@ -12,7 +13,8 @@ const COMPONENTS = [ HomePage ];
     IonicModule,
     CommonModule,
     FormsModule,
-    RouterModule.forChild([{ path: '', component: HomePage },{ path: 'home', component: HomePage }])
+    RouterModule.forChild([{ path: '', component: HomePage },{ path: 'home', component: HomePage }]),
+    SharedModule
   ],
   declarations: [...COMPONENTS],
   exports: [...COMPONENTS]

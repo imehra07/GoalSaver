@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { ContactPage } from './contact';
 import { IonicModule } from '@ionic/angular';
+import { SharedModule } from '../../shared/shared.module';
 
 const COMPONENTS =[ ContactPage ];
 @NgModule({
@@ -11,7 +12,8 @@ const COMPONENTS =[ ContactPage ];
     IonicModule,
     CommonModule,
     FormsModule,
-    RouterModule.forChild([{path:'contact', component: ContactPage}])
+    RouterModule.forChild([{path:'contact', component: ContactPage}]),
+    SharedModule
   ],
   declarations: [...COMPONENTS],
   exports: [...COMPONENTS]

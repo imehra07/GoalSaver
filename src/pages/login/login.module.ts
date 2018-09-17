@@ -7,6 +7,7 @@ import { LoginProvider } from '../../providers/login/login-provider';
 import { AmplifyAngularModule, AmplifyIonicModule, AmplifyService } from 'aws-amplify-angular';
 import { IonicModule } from '@ionic/angular';
 import { AuthenticationGuard } from '../../providers/login/authentication-guard';
+import { SharedModule } from '../../shared/shared.module';
 
 const COMPONENTS =[ LoginPage];
 @NgModule({
@@ -16,7 +17,8 @@ const COMPONENTS =[ LoginPage];
     FormsModule,
     AmplifyAngularModule,
     AmplifyIonicModule,
-    RouterModule.forChild([{ path: '', component: LoginPage }])
+    RouterModule.forChild([{ path: '', component: LoginPage }]),
+    SharedModule
   ],
   declarations: [...COMPONENTS],
   exports: [...COMPONENTS]

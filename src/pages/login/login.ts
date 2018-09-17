@@ -1,4 +1,4 @@
-import { Component, NgZone, OnDestroy } from '@angular/core';
+import { Component, NgZone, OnDestroy, Inject } from '@angular/core';
 import { User } from '../../model/user';
 import { Events } from '@ionic/angular';
 import { AmplifyService } from 'aws-amplify-angular';
@@ -9,6 +9,7 @@ import { AwsProvider } from '../../app/aws-provider';
 import { Subject, Observable, Subscription, BehaviorSubject } from "rxjs";
 import { Router, ActivatedRoute } from '@angular/router';
 import AWS from 'aws-sdk'
+import { AWSToken, AmazonCognitoIdentityToken } from '../../shared/shared.module';
 
 @Component({
   selector: 'page-login',
@@ -26,9 +27,11 @@ export class LoginPage implements OnDestroy{
               public awsProvider: AwsProvider,
               private ngZone: NgZone,
               private route : ActivatedRoute,
-              private router: Router) {
+              private router: Router,
+              @Inject(AWSToken) public aws: any,
+              @Inject(AmazonCognitoIdentityToken) public amazonCognitoIdentity: any) {
 
-    this.authState = {loggedIn: false, credentials: new AWS.CognitoIdentityCredentials({
+    this.authState = {loggedIn: false, credentials: new this.aws.CognitoIdentityCredentials({
       IdentityPoolId: ''
     })};
 
@@ -45,16 +48,16 @@ export class LoginPage implements OnDestroy{
     this.events.publish('data:AuthState', this.authState);
   }
   private authenticate() {
-    this.cognitoUser = new this.awsProvider.AmazonCognitoIdentity.CognitoUser({
+    this.cognitoUser = new this.amazonCognitoIdentity.CognitoUser({
       Username: this.loginUser.username,
-      Pool: this.awsProvider.userPool
+      Pool: this.awsProvider.getUserPool()
     });
 
     var authenticationData = {
       Username : this.loginUser.username,
       Password : this.loginUser.password,
     };
-    var authenticationDetails = new this.awsProvider.AmazonCognitoIdentity.AuthenticationDetails(authenticationData);
+    var authenticationDetails = new this.amazonCognitoIdentity.AuthenticationDetails(authenticationData);
 
     this.cognitoUser.authenticateUser(authenticationDetails, {
       onSuccess: function (result) {
@@ -90,9 +93,9 @@ export class LoginPage implements OnDestroy{
   private signUp() {
 
     this.amplifyService.auth().signUp(this.loginUser.username,this.loginUser.password, this.loginUser.email).then((user)=>{
-      this.cognitoUser = new this.awsProvider.AmazonCognitoIdentity.CognitoUser({
+      this.cognitoUser = new this.amazonCognitoIdentity.CognitoUser({
         Username: this.loginUser.username,
-        Pool: this.awsProvider.userPool
+        Pool: this.awsProvider.getUserPool()
       });
       console.log('after sign up ' + user);
 
